@@ -48,7 +48,6 @@ const BitcoinPrice: React.FC = () => {
 
   return (
     <div>
-      <h1>Willkommen bei CoinJournal</h1>
       <ChartComponent prices={prices} />
     </div>
   );
