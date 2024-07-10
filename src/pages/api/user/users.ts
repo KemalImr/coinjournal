@@ -1,25 +1,26 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { connect } from "@/database";
-import { User } from "@/database/entity/user.entity";
+// pages/api/user/users.ts
+import { NextApiRequest, NextApiResponse } from 'next';
+import prisma from '../../../lib/prisma'; // Korrigiere den Importpfad, falls nötig
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    const dataSource = await connect();
-    const userRepository = dataSource.getRepository(User);
-  
-    switch (req.method) {
-      case 'GET':
-        const users = await userRepository.find();
-        res.status(200).json(users);
-        break;
-  
-      case 'POST':
-        const user = userRepository.create(req.body);
-        const result = await userRepository.save(user);
-        res.status(201).json(result);
-        break;
-  
-      default:
-        res.setHeader('Allow', ['GET', 'POST']);
-        res.status(405).end(`Method ${req.method} Not Allowed`);
-    }
+  switch (req.method) {
+    case 'GET':
+      const users = await prisma.user.findMany();
+      console.log("Fetched users:", users);
+      res.status(200).json(users);
+      break;
+
+    case 'POST':
+      const { name, email } = req.body;
+      const user = await prisma.user.create({
+        data: { name, email },
+      });
+      console.log("Created user:", user);
+      res.status(201).json(user);
+      break;
+
+    default:
+      res.setHeader('Allow', ['GET', 'POST']);
+      res.status(405).end(`Method ${req.method} Not Allowed`);
   }
+}
