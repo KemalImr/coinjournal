@@ -2,16 +2,20 @@ import { useState } from 'react';
 import axios from 'axios';
 
 export default function NewUser() {
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const response = await axios.post('/api/user/users', { name, email });
+      const response = await axios.post('/api/user/users', { email, firstName, lastName, password });
       setMessage(`User ${response.data.name} created successfully!`);
-      setName('');
+      setFirstName('');
+      setLastName('');
+      setPassword('');
       setEmail('');
     } catch (error) {
       setMessage('Error creating user.');
@@ -23,11 +27,20 @@ export default function NewUser() {
       <h1>Create New User</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Name:</label>
+          <label>First Name:</label>
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Last Name:</label>
+          <input
+            type="Text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
             required
           />
         </div>
@@ -37,6 +50,15 @@ export default function NewUser() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
+            />
+        </div>
+        <div>
+          <label>Password:</label>
+          <input
+            type="text"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
