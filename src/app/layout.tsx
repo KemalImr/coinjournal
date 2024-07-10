@@ -1,7 +1,5 @@
-import './globals.css';
+import Link from 'next/link';
 import React, { ReactNode } from 'react';
-import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
-
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -10,8 +8,21 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-
-      <body>{children}</body>
+      <body>
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <Link href="/">Home</Link>
+              </li>
+              <li>
+                <Link href="/new-users">Create User</Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        {children}
+      </body>
     </html>
   );
 }
