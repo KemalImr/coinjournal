@@ -7,6 +7,16 @@ const RegisterPage = () => {
       <h1 className="text-4xl font-bold mb-8">Konto erstellen</h1>
       <form className="space-y-4">
         <input
+          type="password"
+          placeholder="Passwort"
+          className="px-4 py-2 border rounded"
+        />
+        <input
+          type="password"
+          placeholder="Passwort"
+          className="px-4 py-2 border rounded"
+        />
+        <input
           type="email"
           placeholder="Email"
           className="px-4 py-2 border rounded"
