@@ -5,9 +5,9 @@ const BitcoinPrice = dynamic(() => import('./components/BitcoinPrice'), { ssr: f
 
 export default function Home() {
   return (
-    <div>
-      <h1 className='text-6xl font font-thin'>Willkommen bei CoinJournal</h1>
+    <>
+
       <BitcoinPrice />
-    </div>
+    </>
   );
 }

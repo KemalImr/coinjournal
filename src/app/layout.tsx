@@ -3,7 +3,12 @@
 
 import './globals.css';
 import React, { ReactNode } from 'react';
+import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
+import { Nav } from '@/components/nav';
+import { ThemeProvider } from 'next-themes'
 import Link from 'next/link';
+
+import { TradingProvider } from '../context/TradingContext';
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -12,30 +17,19 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body>
-        <header className="bg-gray-800 text-white p-4">
-          <nav className="container mx-auto flex justify-between">
-            <div>
-              <Link href="/" className="font-bold text-lg">
-                CoinJournal
-              </Link>
-            </div>
-            <div className="space-x-4">
-              <Link href="/welcome" className="hover:underline">
-                Willkommen
-              </Link>
-              <Link href="/login" className="hover:underline">
-                Anmelden
-              </Link>
-              <Link href="/register" className="hover:underline">
-                Konto erstellen
-              </Link>
-            </div>
-          </nav>
-        </header>
-        <main className="container mx-auto p-4">
-          {children}
-        </main>
+
+    <body>
+      <ThemeProvider>
+        <TradingProvider>
+      <div className="ps-20">
+        <Link href="/">
+          <h1 className='text-6xl font font-thin ps-16'>CoinJournal</h1>
+        </Link>
+        <Nav />
+      </div>
+      {children}
+      </TradingProvider>
+      </ThemeProvider>
       </body>
     </html>
   );

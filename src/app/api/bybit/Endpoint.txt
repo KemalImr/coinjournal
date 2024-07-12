@@ -1,0 +1,85 @@
+Relevante GET-Endpunkte für ein automatisiertes Journal
+Market Daten
+
+Kline Daten (Kerzenchart-Daten)
+GET /v5/market/kline
+Mark-Price-Kline
+GET /v5/market/mark-price-kline
+Index-Price-Kline
+GET /v5/market/index-price-kline
+Premium-Index-Price-Kline
+GET /v5/market/premium-index-price-kline
+Orderbuch
+GET /v5/market/orderbook
+Tickers
+GET /v5/market/tickers
+Funding-Geschichte
+GET /v5/market/funding/history
+Recent Trades
+GET /v5/market/recent-trade
+Open Interest
+GET /v5/market/open-interest
+Historische Volatilität
+GET /v5/market/historical-volatility
+Insurance Fund
+GET /v5/market/insurance
+Instrument Info
+GET /v5/market/instruments-info
+Risk Limit
+GET /v5/market/risk-limit
+Delivery Price
+GET /v5/market/delivery-price
+Order Daten
+
+Realtime Order Daten
+GET /v5/order/realtime
+Order History
+GET /v5/order/history
+Position Daten
+
+Positionen auflisten
+GET /v5/position/list
+Closed PnL
+GET /v5/position/closed-pnl
+Execution List
+GET /v5/execution/list
+Account Daten
+
+Kontostand
+GET /v5/account/wallet-balance
+Borrow History
+GET /v5/account/borrow-history
+Collateral Info
+GET /v5/account/collateral-info
+Account Info
+GET /v5/account/info
+Transaction Log
+GET /v5/account/transaction-log
+Asset Daten
+
+Delivery Record
+GET /v5/asset/delivery-record
+Settlement Record
+GET /v5/asset/settlement-record
+Inter-Transfer List
+GET /v5/asset/transfer/query-inter-transfer-list
+Universal Transfer List
+GET /v5/asset/transfer/query-universal-transfer-list
+Transfer Coin List
+GET /v5/asset/transfer/query-transfer-coin-list
+Sub Member List
+GET /v5/asset/transfer/query-sub-member-list
+Account Coin Balance
+GET /v5/asset/transfer/query-account-coin-balance
+Asset Info
+GET /v5/asset/transfer/query-asset-info
+Allowed Deposit List
+GET /v5/asset/deposit/query-allowed-list
+Deposit Record
+GET /v5/asset/deposit/query-record
+Sub Member Deposit Record
+GET /v5/asset/deposit/query-sub-member-record
+Withdraw Record
+GET /v5/asset/withdraw/query-record
+Coin Info
+GET /v5/asset/coin/query-info
