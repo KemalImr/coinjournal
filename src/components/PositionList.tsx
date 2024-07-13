@@ -4,7 +4,7 @@ import Position from './Position';
 const PositionsList: React.FC = () => {
   const [positions, setPositions] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<Error | any>(null);
 
   useEffect(() => {
     const fetchPositions = async () => {
