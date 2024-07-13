@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import ChartComponent from './ChartComponent';
+import BtcChartComponent from './BtcChartComponent';
 
 interface PriceData {
   date: string;
@@ -48,7 +48,7 @@ const BitcoinPrice: React.FC = () => {
 
   return (
     <div>
-      <ChartComponent prices={prices} />
+      <BtcChartComponent prices={prices} />
     </div>
   );
 };

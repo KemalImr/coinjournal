@@ -21,7 +21,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-const ChartComponent: React.FC<ChartComponentProps> = ({ prices }) => {
+const BtcChartComponent: React.FC<ChartComponentProps> = ({ prices }) => {
   const formattedData = prices.map(price => ({
     date: new Date(price.date).toLocaleDateString('de-DE', { month: 'short', year: 'numeric' }),
     price: price.price,
@@ -85,4 +85,4 @@ const ChartComponent: React.FC<ChartComponentProps> = ({ prices }) => {
   );
 };
 
-export default ChartComponent;
+export default BtcChartComponent;

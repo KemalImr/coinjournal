@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
   }
 
   const endpoint = '/v5/account/wallet-balance';
-  const data = 'accountType=UNIFIED'; // Beispiel für accountType, anpassen falls nötig
+  const data = 'accountType=SPOT';
   const sign = generateSignature(data, secret, apiKey, timestamp);
 
   try {
@@ -33,8 +33,7 @@ export async function GET(req: NextRequest) {
         'X-BAPI-RECV-WINDOW': recvWindow.toString(),
       },
       params: {
-        accountType: 'UNIFIED',
-         // Beispiel für accountType, anpassen falls nötig
+        accountType: 'SPOT',
       },
     });
 

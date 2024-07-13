@@ -743,41 +743,41 @@
 
 
 
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 
-const Dashboard = () => {
-  const [balance, setBalance] = useState(null);
+// const Dashboard = () => {
+//   const [balance, setBalance] = useState(null);
 
-  useEffect(() => {
-    const fetchBalance = async () => {
-      try {
-        const response = await fetch('/api/bybit/balance');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setBalance(data);
-      } catch (error) {
-        console.error('Error fetching balance:', error);
-      }
-    };
+//   useEffect(() => {
+//     const fetchBalance = async () => {
+//       try {
+//         const response = await fetch('/api/bybit/balance');
+//         if (!response.ok) {
+//           throw new Error('Network response was not ok');
+//         }
+//         const data = await response.json();
+//         setBalance(data);
+//       } catch (error) {
+//         console.error('Error fetching balance:', error);
+//       }
+//     };
 
-    fetchBalance();
-  }, []);
+//     fetchBalance();
+//   }, []);
 
-  return (
-    <div>
-      <h1>Dashboard</h1>
-      {balance ? (
-        <pre>{JSON.stringify(balance, null, 2)}</pre>
-      ) : (
-        <p>Loading balance...</p>
-      )}
-    </div>
-  );
-};
+//   return (
+//     <div>
+//       <h1>Dashboard</h1>
+//       {balance ? (
+//         <pre>{JSON.stringify(balance, null, 2)}</pre>
+//       ) : (
+//         <p>Loading balance...</p>
+//       )}
+//     </div>
+//   );
+// };
 
-export default Dashboard;
+// export default Dashboard;
 
 
 
@@ -838,3 +838,60 @@ export default Dashboard;
 // };
 
 // export default Dashboard;
+
+
+
+
+
+
+
+
+import { useEffect, useState } from 'react';
+import TokenList from '@/components/TokenList';
+import StatsCard from '@/components/StatsCard';
+import PositionsList from '@/components/AllPosList';
+
+const Dashboard = () => {
+  const [balance, setBalance] = useState<any>(null);
+  const [coin, setCoin] = useState<any>(null);
+  
+  useEffect(() => {
+    const fetchBalance = async () => {
+      try {
+        const response = await fetch('/api/bybit/balance');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setBalance(data);
+      } catch (error) {
+        console.error('Error fetching balance:', error);
+      }
+    };
+
+    fetchBalance();
+  }, []);
+
+  return (
+    <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
+      {balance ? (
+        <>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <StatsCard title="Total Equity" value={balance.result.list[0].totalEquity} />
+          <StatsCard title="Total Wallet Balance" value={balance.result.list[0].totalWalletBalance} />
+          <StatsCard title="Total Perp UPL" value={balance.result.list[0].totalPerpUPL} />
+        </div>  
+          <TokenList coin={coin} balance={balance} />
+          
+        
+        <PositionsList />
+        </>
+      ) : (
+        <p>Loading balance...</p>
+      )}
+    </div>
+  );
+};
+
+export default Dashboard;
