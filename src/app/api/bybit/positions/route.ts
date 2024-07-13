@@ -19,12 +19,12 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ message: 'API key or secret is missing' }, { status: 500 });
   }
 
-  const endpoint = '/v5/account/wallet-balance';
-  const data = 'accountType=UNIFIED'; // Beispiel für accountType, anpassen falls nötig
-  const sign = generateSignature(data, secret, apiKey, timestamp);
-
-  try {
-    const response = await axios.get(url + endpoint, {
+  const endpoint = '/v5/position/list';
+  const categories = ['linear', 'inverse', 'option'];
+  const requests = categories.map(category => {
+    const data = `category=${category}`;
+    const sign = generateSignature(data, secret, apiKey, timestamp);
+    return axios.get(url + endpoint, {
       headers: {
         'X-BAPI-SIGN-TYPE': '2',
         'X-BAPI-SIGN': sign,
@@ -33,23 +33,21 @@ export async function GET(req: NextRequest) {
         'X-BAPI-RECV-WINDOW': recvWindow.toString(),
       },
       params: {
-        accountType: 'UNIFIED',
-         // Beispiel für accountType, anpassen falls nötig
+        category,
       },
+    }).catch(error => {
+      console.error(`Error fetching data for category ${category}:`, error.response?.data || error.message);
+      return null;  // Ensure the Promise.all can handle this
     });
+  });
 
-    return NextResponse.json(response.data);
+  try {
+    const responses = await Promise.all(requests);
+    const validResponses = responses.filter(response => response && response.data && response.data.result && response.data.result.list);
+    const positions = validResponses.flatMap(response => response.data.result.list);
+    return NextResponse.json({ positions });
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.error('Axios error fetching balance:', error.message);
-      if (error.response) {
-        return NextResponse.json({ message: error.response.data }, { status: error.response.status });
-      } else {
-        return NextResponse.json({ message: error.message }, { status: 500 });
-      }
-    } else {
-      console.error('Unknown error:', error);
-      return NextResponse.json({ message: 'Unknown error occurred' }, { status: 500 });
-    }
+    console.error('Unknown error:', error);
+    return NextResponse.json({ message: 'Unknown error occurred' }, { status: 500 });
   }
 }
