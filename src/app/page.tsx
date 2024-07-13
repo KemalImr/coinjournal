@@ -1,3 +1,4 @@
+// pages/index.tsx
 import React from 'react';
 import dynamic from 'next/dynamic';
 
@@ -6,7 +7,6 @@ const BitcoinPrice = dynamic(() => import('../components/BitcoinPrice'), { ssr: 
 export default function Home() {
   return (
     <>
-
       <BitcoinPrice />
     </>
   );

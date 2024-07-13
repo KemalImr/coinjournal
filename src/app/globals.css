@@ -1,11 +1,11 @@
 @tailwind base;
   @tailwind components;
   @tailwind utilities;
-
+ 
   @layer base {
     :root {
       --gradient: linear-gradient(to top left,#2b5876,#4e4376);
-
+ 
       --background: 217 30.549999999999997% 2.56%;
       --foreground: 217 4.699999999999999% 96.6%;
   
@@ -40,10 +40,10 @@
       --chart-4: 43 74% 66%;
       --chart-5: 27 87% 67%;
     }
-
+ 
     .dark {
       --gradient: linear-gradient(to top left,#2b5876,#4e4376);
-
+ 
       --background: 217 30.549999999999997% 2.56%;
       --foreground: 217 4.699999999999999% 96.6%;
   
@@ -81,6 +81,10 @@
     }
   }
 
+  .welcome-background {
+    background-color: hsl(var(--background));
+  }
+ 
   @layer base {
     * {
       @apply border-border;
@@ -89,3 +93,4 @@
       @apply bg-background text-foreground;
     }
   }
+ 
