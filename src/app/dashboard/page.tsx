@@ -881,9 +881,10 @@ const Dashboard = () => {
           <StatsCard title="Total Equity" value={balance.result.list[0].totalEquity} />
           <StatsCard title="Total Wallet Balance" value={balance.result.list[0].totalWalletBalance} />
           <StatsCard title="Total Perp UPL" value={balance.result.list[0].totalPerpUPL} />
+        </div>  
           <TokenList coin={coin} balance={balance} />
           
-        </div>
+        
         <PositionsList />
         </>
       ) : (
